@@ -126,21 +126,6 @@ function clearDisplay() {
     result = null;
 }
 
-function operate(x, y, op) {
-    if(op === '+') {
-        return x + y;
-    } else if(op === '-') {
-        return x - y;
-    } else if(op === '*') {
-        return x * y;
-    } else if(op === '/') {
-        if(y === 0) {
-            return 'xD';
-        } else {
-        return x / y;
-        }
-    }
-}
 
 function populateDisplay () {
     display.textContent =  displayString;
@@ -179,5 +164,23 @@ function operate (operator,firstNumber,secondNumber) {
 }
 
 
+function operate(x, y, op) {
+    if(op === '+') {
+        return x + y;
+    } else if(op === '-') {
+        return x - y;
+    } else if(op === '*') {
+        return x * y;
+    } else if(op === '/') {
+        if(y === 0) {
+            return 'xD';
+        } else {
+        return x / y;
+        }
+    }
+}
 
+function roundAccurately(num, places) {
+    return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
+}
 
