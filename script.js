@@ -118,7 +118,7 @@ function inputEquals() {
 }
 
 function clearDisplay() {
-    displayValue = '0';
+    displayString = '0';
     firstNumber = null;
     secondNumber = null;
     firstOperator = null;
@@ -129,7 +129,9 @@ function clearDisplay() {
 
 function populateDisplay () {
     display.textContent =  displayString;
-    return display.textContent
+    if (displayString.length > 9) {
+        display.textContent = displayString.substring(0, 9);
+    }
 }
 
 function add(a,b) {
