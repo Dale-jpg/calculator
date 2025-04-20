@@ -24,13 +24,16 @@ digitButtons.forEach(button => button.addEventListener("click",()=> {
 operatorButtons.forEach(button => button.addEventListener("click",()=> {
     inputOperator(button.textContent);
     populateDisplay(displayString);
-
 }))
 
 equalButton.addEventListener("click",() => {
     inputEquals();
     populateDisplay(displayString);
+})
 
+clearButton.addEventListener("click",() => {
+    clearDisplay();
+    populateDisplay(displayString);
 })
 
 
@@ -114,6 +117,14 @@ function inputEquals() {
     }
 }
 
+function clearDisplay() {
+    displayValue = '0';
+    firstNumber = null;
+    secondNumber = null;
+    firstOperator = null;
+    secondOperator = null;
+    result = null;
+}
 
 function populateDisplay () {
     display.textContent =  displayString;
