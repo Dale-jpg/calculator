@@ -4,10 +4,12 @@
 const display = document.querySelector('#display');
 const digitButtons = document.querySelectorAll('.digit');
 const operatorButtons = document.querySelectorAll('.operator');
-const clear = document.querySelector("clear");
+const equalButton = document.querySelector(".equal"); 
+const clearButton = document.querySelector("clear");
 
 
 const displayArray = [];
+let displayString;
 let input;
 let firstNumber;
 let operator;
@@ -16,11 +18,39 @@ let secondNumber;
 digitButtons.forEach(button => button.addEventListener("click",()=> {
     input = Number(button.textContent);
     displayArray.push(input);
-    populateDisplay(displayArray);
+    displayString = displayArray.join("");
+    populateDisplay(displayString);
 }))
 
+operatorButtons.forEach(button => button.addEventListener("click",()=> {
+    if (button.textContent === '+') {
+        operator = "+";
+    } else if (button.textContent === '-') {
+        operator = "-";
+    } else if (button.textContent === 'x') {
+        operator = "x";
+    } else if (button.textContent === '/') {
+        operator = "/";
+    } else {
+1
+    }
+    displayArray [1] = operator;
+    displayString = displayArray.join("");
+    populateDisplay(displayString);
+
+}))
+
+equalButton.addEventListener("click",() => {
+    firstNumber = displayArray [0];
+    operator = displayArray[1];
+    secondNumber = displayArray[2];
+    displayString = operate(operator,firstNumber,secondNumber);
+    populateDisplay(displayString);
+
+})
+
 function populateDisplay () {
-    display.textContent =  displayArray.join("");
+    display.textContent =  displayString;
     return display.textContent
 }
 
@@ -46,23 +76,23 @@ function divide (a,b) {
 // console.log(divide(4,2));
 
 function operate (operator,firstNumber,secondNumber) {
-    if (operator == 'add') {
+    if (operator == '+') {
         return add(firstNumber,secondNumber);
-    } else if (operator == 'subtract') {
+    } else if (operator == '-') {
         return subtract(firstNumber,secondNumber);
-    } else if (operator == 'multiply') {
+    } else if (operator == 'x') {
         return multiply(firstNumber,secondNumber);
-    } else if (operator == 'divide') {
+    } else if (operator == '/') {
         return divide (firstNumber,secondNumber);
     } else {
         
     }
 }
 
-console.log(operate('add',5,3));
-console.log(operate('subtract',5,3));
-console.log(operate('multiply',5,3));
-console.log(operate('divide',5,3));
+console.log(operate('+',5,3));
+console.log(operate('-',5,3));
+console.log(operate('x',5,3));
+console.log(operate('/',5,3));
 
 
 
