@@ -32,7 +32,7 @@ operatorButtons.forEach(button => button.addEventListener("click",()=> {
     } else if (button.textContent === '/') {
         operator = "/";
     } else {
-1
+
     }
     displayArray [1] = operator;
     displayString = displayArray.join("");
