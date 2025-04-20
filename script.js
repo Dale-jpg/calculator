@@ -8,8 +8,7 @@ const equalButton = document.querySelector(".equal");
 const clearButton = document.querySelector("clear");
 
 
-const displayArray = [];
-let displayString;
+let displayString ;
 let input;
 let firstNumber;
 let operator;
@@ -17,8 +16,6 @@ let secondNumber;
 
 digitButtons.forEach(button => button.addEventListener("click",()=> {
     input = Number(button.textContent);
-    displayArray.push(input);
-    displayString = displayArray.join("");
     populateDisplay(displayString);
 }))
 
@@ -45,6 +42,8 @@ equalButton.addEventListener("click",() => {
     operator = displayArray[1];
     secondNumber = displayArray[2];
     displayString = operate(operator,firstNumber,secondNumber);
+    displayArray = [];
+    displayArray [0] = displayString;
     populateDisplay(displayString);
 
 })
@@ -85,10 +84,6 @@ function operate (operator,firstNumber,secondNumber) {
     }
 }
 
-console.log(operate('+',5,3));
-console.log(operate('-',5,3));
-console.log(operate('x',5,3));
-console.log(operate('/',5,3));
 
 
 
