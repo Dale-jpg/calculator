@@ -5,7 +5,7 @@ const display = document.querySelector('#display');
 const digitButtons = document.querySelectorAll('.digit');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector(".equal"); 
-const clearButton = document.querySelector("clear");
+const clearButton = document.querySelector("#clear");
 
 
 
@@ -38,7 +38,7 @@ clearButton.addEventListener("click",() => {
 
 
 function inputNumber(number) {
-    if (firstNumber === 0) {
+    if (firstNumber === null) {
         if (displayString === '0' || displayString === 0) {
             // 1st click - handles first Number input
             displayString = number;
@@ -46,7 +46,7 @@ function inputNumber(number) {
             //starts new operation after inputEquals()
             displayString = number;
         } else {
-            displayString+= number;
+            displayString += number;
         }
     } else {
         //3rd/5th click - inputs to secondNumber
@@ -124,6 +124,22 @@ function clearDisplay() {
     firstOperator = null;
     secondOperator = null;
     result = null;
+}
+
+function operate(x, y, op) {
+    if(op === '+') {
+        return x + y;
+    } else if(op === '-') {
+        return x - y;
+    } else if(op === '*') {
+        return x * y;
+    } else if(op === '/') {
+        if(y === 0) {
+            return 'xD';
+        } else {
+        return x / y;
+        }
+    }
 }
 
 function populateDisplay () {
