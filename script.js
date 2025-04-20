@@ -22,30 +22,17 @@ digitButtons.forEach(button => button.addEventListener("click",()=> {
 }))
 
 operatorButtons.forEach(button => button.addEventListener("click",()=> {
-    if (button.textContent === '+') {
-        operator = "+";
-    } else if (button.textContent === '-') {
-        operator = "-";
-    } else if (button.textContent === 'x') {
-        operator = "x";
-    } else if (button.textContent === '/') {
-        operator = "/";
-    } else {
-
-    }
+    inputOperator(button.textContent);
     populateDisplay(displayString);
 
 }))
 
 equalButton.addEventListener("click",() => {
-    firstNumber = displayArray [0];
-    operator = displayArray[1];
-    secondNumber = displayArray[2];
-    displayString = operate(operator,firstNumber,secondNumber);
-
+    inputEquals();
     populateDisplay(displayString);
 
 })
+
 
 function inputNumber(number) {
     if (firstNumber === 0) {
@@ -91,6 +78,42 @@ function inputOperator(operator){
         firstNumber = displayString;
     }
 }
+
+function inputEquals() {
+    //hitting equals doesn't display undefined before operate()
+    if(firstOperator === null) {
+        displayString = displayString;
+    } else if(secondOperator != null) {
+        //handles final result
+        secondNumber = displayString;
+        result = operate(Number(firstNumber), Number(secondNumber), secondOperator);
+        if(result === 'xD') {
+            displayString = 'xD';
+        } else {
+            displayString = roundAccurately(result, 15).toString();
+            firstNumber = displayString;
+            secondNumber = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    } else {
+        //handles first operation
+        secondNumber = displayString;
+        result = operate(Number(firstNumber), Number(secondNumber), firstOperator);
+        if(result === 'xD') {
+            displayString = 'xD';
+        } else {
+            displayString = roundAccurately(result, 15).toString();
+            firstNumber = displayString;
+            secondNumber = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    }
+}
+
 
 function populateDisplay () {
     display.textContent =  displayString;
