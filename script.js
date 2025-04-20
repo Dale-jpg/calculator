@@ -33,8 +33,6 @@ operatorButtons.forEach(button => button.addEventListener("click",()=> {
     } else {
 
     }
-    displayArray [1] = operator;
-    displayString = displayArray.join("");
     populateDisplay(displayString);
 
 }))
@@ -44,16 +42,15 @@ equalButton.addEventListener("click",() => {
     operator = displayArray[1];
     secondNumber = displayArray[2];
     displayString = operate(operator,firstNumber,secondNumber);
-    displayArray = [];
-    displayArray [0] = displayString;
+
     populateDisplay(displayString);
 
 })
 
 function inputNumber(number) {
     if (firstNumber === 0) {
-        if (displayString === '0' || displayValue === 0) {
-            // 1st click - handles first operand input
+        if (displayString === '0' || displayString === 0) {
+            // 1st click - handles first Number input
             displayString = number;
         } else if(displayString === firstNumber) {
             //starts new operation after inputEquals()
@@ -62,7 +59,7 @@ function inputNumber(number) {
             displayString+= number;
         }
     } else {
-        //3rd click - inputs to secondNumber
+        //3rd/5th click - inputs to secondNumber
         if(displayString === firstNumber) {
             displayString = number;
         } else {
@@ -72,8 +69,27 @@ function inputNumber(number) {
 }
 
 function inputOperator(operator){
-    // 2nd click - handles first operator input
-    operator = 
+    if(firstOperator != null && secondOperator === null) {
+        //4th click - handles input of second operator
+        secondOperator = operator;
+        secondNumber = displayString;
+        result = operate(Number(firstNumber), Number(secondNumber), firstOperator);
+        displayString = roundAccurately(result, 15).toString();
+        firstNumber = displayString;
+        result = null;
+    } else if(firstOperator != null && secondOperator != null) {
+        //6th click - new secondOperator
+        secondNumber = displayString;
+        result = operate(Number(firstNumber), Number(secondNumber), secondOperator);
+        secondOperator = operator;
+        displayString = roundAccurately(result, 15).toString();
+        firstNumber = displayString;
+        result = null;
+    } else { 
+        //2nd click - handles first operator input
+        firstOperator = operator;
+        firstNumber = displayString;
+    }
 }
 
 function populateDisplay () {
